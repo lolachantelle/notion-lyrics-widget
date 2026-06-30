@@ -8,84 +8,81 @@
 <style>
 body {
     margin: 0;
-    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at top, #f7f1ea, #e9dfd6);
+    align-items: center;
+
+    /* 🌙 IMPORTANT: now transparent-friendly */
+    background: transparent;
+
     font-family: 'Inter', sans-serif;
 }
 
-/* 🌸 main glass card */
+/* 🌸 smaller Notion-friendly card */
 .card {
-    width: 360px;
-    padding: 28px;
-    border-radius: 22px;
+    width: 260px;   /* smaller so 3-column Notion layouts feel good */
+    padding: 18px 16px;
+
+    border-radius: 18px;
 
     background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 
     text-align: center;
 
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* fade animation trigger */
-.fade-out {
+/* fade animation */
+.fade {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
 }
 
-/* lyric text */
+/* ✨ lyric styling */
 .lyric {
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
-    color: #2c2a28;
-    margin-bottom: 18px;
+    color: #2b2a28;
+    white-space: pre-line; /* IMPORTANT: keeps your line breaks */
 }
 
-/* source */
+/* artist + song */
 .source {
-    font-size: 13px;
+    margin-top: 10px;
+    font-size: 12px;
     color: #6f6a64;
-    margin-bottom: 22px;
+    font-style: italic;
 }
 
 /* divider */
 .divider {
-    width: 60px;
+    width: 40px;
     height: 1px;
-    background: #d6ccc2;
-    margin: 14px auto;
+    background: rgba(0,0,0,0.15);
+    margin: 12px auto;
 }
 
 /* button */
 button {
+    margin-top: 10px;
     background: #d8a7b1;
     color: white;
     border: none;
-    padding: 10px 18px;
+    padding: 8px 14px;
     border-radius: 999px;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: transform 0.2s ease, background 0.2s ease;
+    font-size: 12px;
+    transition: transform 0.15s ease;
 }
 
 button:hover {
     transform: scale(1.05);
-    background: #c98f9b;
-}
-
-/* tiny decorative icon */
-.note {
-    font-size: 18px;
-    margin-bottom: 10px;
 }
 </style>
 </head>
@@ -94,62 +91,147 @@ button:hover {
 
 <div class="card" id="card">
 
-    <div class="note">✿</div>
-
-    <div class="lyric" id="lyric">
-        Loading...
-    </div>
+    <div class="lyric" id="lyric"></div>
 
     <div class="divider"></div>
 
     <div class="source" id="source"></div>
 
-    <button onclick="newLyric()">↻ shuffle</button>
+    <button onclick="nextLyric()">↻ shuffle</button>
 
 </div>
 
 <script>
 const lyrics = [
 {
-lyric: "You said you like my hair, so go ahead and touch it",
-song: "Apple Cider",
-artist: "beabadoobee"
+lyric: "Too young to hold on\nAnd too old to just break free and run",
+song: "Lover, You Should've Come Over",
+artist: "Jeff Buckley"
 },
 {
-lyric: "I wish I could be more than just someone you used to know",
-song: "Glue Song",
-artist: "beabadoobee"
+lyric: "Anyway, don't be a stranger",
+song: "Scott Street",
+artist: "Phoebe Bridgers"
 },
 {
-lyric: "And I still think about you in the middle of the night",
-song: "Talk",
-artist: "beabadoobee"
+lyric: "It's so easy to laugh, it's so easy to hate\nIt takes strength to be gentle and kind",
+song: "I Know It's Over",
+artist: "The Smiths"
 },
 {
-lyric: "Tell me that you love me even if it isn't true",
-song: "Pretty Girl",
-artist: "Clairo"
+lyric: "Yeah, my boyfriend's pretty cool\nBut he's not as cool as me",
+song: "Brooklyn Baby",
+artist: "Lana Del Rey"
+},
+{
+lyric: "What a waste, army dreamers",
+song: "Army Dreamers",
+artist: "Kate Bush"
+},
+{
+lyric: "You're in the wind, I'm in the water\nNobody's son, nobody's daughter",
+song: "Chemtrails Over the Country Club",
+artist: "Lana Del Rey"
+},
+{
+lyric: "And I watched you change\nIt's like you never had wings",
+song: "Change (In the House of Flies)",
+artist: "Deftones"
+},
+{
+lyric: "If like, you should sink down beneath\nI'll swim down, would you?",
+song: "Cherry Waves",
+artist: "Deftones"
+},
+{
+lyric: "Stay with me\nAs we cross the empty skies",
+song: "Rosemary",
+artist: "Deftones"
+},
+{
+lyric: "From the day you arrive\nI have stayed by your side",
+song: "Entombed",
+artist: "Deftones"
+},
+{
+lyric: "It feels good to know you're mine\nNow drive me far away, away, away",
+song: "Be Quiet and Drive (Far Away)",
+artist: "Deftones"
+},
+{
+lyric: "But it's calm under the waves\nIn the blue of my oblivion",
+song: "Sullen Girl",
+artist: "Fiona Apple"
+},
+{
+lyric: "Yeah, I'll haunt the world inside you",
+song: "Slow Like Honey",
+artist: "Fiona Apple"
+},
+{
+lyric: "She's the angel on top of the tree",
+song: "Petals",
+artist: "Hole"
+},
+{
+lyric: "My heart is yours\nIt's you that I hold on to",
+song: "Sparks",
+artist: "Coldplay"
+},
+{
+lyric: "Such a pretty house\nAnd such a pretty garden",
+song: "No Surprises",
+artist: "Radiohead"
+},
+{
+lyric: "Call her moonchild\nDancing in the shallows of a river",
+song: "Moonchild",
+artist: "King Crimson"
+},
+{
+lyric: "And I wanna be your wife\nSo, I hold you to my knife",
+song: "not a lot, just forever",
+artist: "Adrianne Lenker"
+},
+{
+lyric: "You put your hands into your head\nAnd then its smiles cover your heart",
+song: "Fade Into You",
+artist: "Mazzy Star"
+},
+{
+lyric: "When you're right, you're right\nEven when you're wrong",
+song: "Paris, Texas",
+artist: "Lana Del Rey"
 }
 ];
 
-function newLyric() {
-const card = document.getElementById("card");
+let remaining = [...Array(lyrics.length).keys()];
 
-card.classList.add("fade-out");
+function nextLyric() {
+const card = document.getElementById("card");
+card.classList.add("fade");
 
 setTimeout(() => {
 
-const item = lyrics[Math.floor(Math.random() * lyrics.length)];
-
-document.getElementById("lyric").innerText = `"${item.lyric}"`;
-document.getElementById("source").innerText = `— ${item.artist}, ${item.song}`;
-
-card.classList.remove("fade-out");
-
-}, 250);
+if (remaining.length === 0) {
+remaining = [...Array(lyrics.length).keys()];
 }
 
-newLyric();
+const index = Math.floor(Math.random() * remaining.length);
+const lyricIndex = remaining.splice(index, 1)[0];
+
+const item = lyrics[lyricIndex];
+
+document.getElementById("lyric").innerText = item.lyric;
+document.getElementById("source").innerHTML =
+`— <i>${item.artist}</i>, ${item.song}`;
+
+card.classList.remove("fade");
+
+}, 200);
+}
+
+nextLyric();
 </script>
 
 </body>
