@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            padding: 20px;
+            max-width: 500px;
+        }
+
+        #lyric {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        #source {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="lyric"></div>
+<div id="source"></div>
+
+<button onclick="newLyric()">🔄 Refresh</button>
+
+<script>
+const lyrics = [
+{
+lyric: "You said you like my hair, so go ahead and touch it",
+song: "Apple Cider",
+artist: "Beabadoobee"
+},
+{
+lyric: "I never knew I could feel this way",
+song: "Glue Song",
+artist: "Beabadoobee"
+},
+{
+lyric: "Another lyric here",
+song: "Another Song",
+artist: "Artist"
+}
+];
+
+function newLyric() {
+    const item = lyrics[Math.floor(Math.random() * lyrics.length)];
+
+    document.getElementById("lyric").innerText =
+        `"${item.lyric}"`;
+
+    document.getElementById("source").innerText =
+        `— ${item.artist}, ${item.song}`;
+}
+
+newLyric();
+</script>
+
+</body>
+</html>
